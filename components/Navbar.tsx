@@ -3,58 +3,56 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
+import NavigationDropdown from "@/components/NavigationDropdown";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
     const pathname = usePathname();
 
     const menu = [
-        { name: "Kiến thức", href: "/blog" },
+        { name: "Điểm đến", href: "/destinations" },
+        { name: "Camp", href: "/camps" },
         { name: "Huấn luyện viên", href: "/coaches" },
-        { name: "Dịch vụ", href: "/services", hasSub: true },
-        { name: "Chương trình", href: "/programs", hasSub: true },
-        { name: "Đánh giá", href: "/reviews" },
-        { name: "Liên hệ", href: "/contact" },
+        { name: "Câu chuyện", href: "/stories" },
+        { name: "Lưu trú", href: "/travel" },
+        { name: "FAQ", href: "/faq" },
     ];
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
-        <header className="fixed w-full z-[100] flex justify-center transition-all bg-deep-black/80 backdrop-blur-md">
-            <nav className="w-full max-w-7xl h-[64px] px-6 lg:px-10 flex items-center justify-between rounded-full">
-
-                {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                    <div className="w-8 h-8 flex items-center justify-center">
-                        <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-                            <path d="M4 18L10 6L14 12L20 6" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </div>
-                    <span className="text-white font-black text-xl tracking-tighter">GOPEAKS</span>
-                </Link>
-
+        <header className={`fixed w-full z-[100] flex justify-center transition-all ${scrolled
+            ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-white/10 bg-scrolled"
+            : "bg-transparent bg-transparent-scrolled"
+            }`}>
+            <nav className="w-full max-w-7xl h-[80px] flex items-center justify-between">
+                <nav className="p-4 flex items-center gap-2 col-logo">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                        <span className="text-white font-black text-2xl tracking-tighter">GOPEAKS</span>
+                    </Link>
+                    <NavigationDropdown />
+                </nav>
                 {/* Desktop Navigation */}
-                <div className="hidden lg:flex items-center gap-8">
+                <div className="hidden lg:flex items-center gap-3 nav-menu">
                     {menu.map((item) => {
-                        // 🔥 Active logic (support sub route)
-                        const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
-
+                        const isActive = pathname === item.href;
                         return (
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className={`flex items-center gap-1 text-[13px] font-semibold uppercase tracking-wider transition-all
-                                ${isActive
-                                        ? "text-white"
-                                        : "text-white/60 hover:text-white"
-                                    }`}
+                                className={`text-[13px] tracking-wider transition-all
+                                ${isActive ? "text-white active-menu" : "text-white/80 hover:text-white"}`}
                             >
                                 {item.name}
-
-                                {item.hasSub && (
-                                    <ChevronDown
-                                        size={14}
-                                        className={`transition-transform ${isActive ? "rotate-180 opacity-100" : "opacity-60"
-                                            }`}
-                                    />
-                                )}
                             </Link>
                         );
                     })}
@@ -62,8 +60,11 @@ export default function Navbar() {
 
                 {/* Right Action */}
                 <div className="flex items-center">
-                    <Link href="/register" className="pill-button-white px-6 py-2.5 text-[13px]">
-                        Bắt đầu
+                    <Link href="/contact" className="px-8 py-3 text-[13px] text-white/80 hover:text-white">
+                        Liên hệ
+                    </Link>
+                    <Link href="/consult" className="pill-button-blue bg-primary hover:bg-primary-hover px-8 py-3 text-[13px]">
+                        Nhận tư vấn
                     </Link>
                 </div>
             </nav>

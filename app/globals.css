@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: #3b62ff;
-  --color-primary-hover: #2a4dd9;
+  --color-primary: #162E97;
+  --color-primary-hover: #2C4ACE;
+  --color-accent: #2C4ACE;
   --color-deep-black: #060809;
-  --color-light-bg: #f5f5f5;
+  --color-light-bg: #f8f9fa;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
@@ -43,11 +44,20 @@ body {
   @apply px-8 py-3 rounded-full border border-white/20 text-white font-bold text-sm tracking-wide transition-all hover:bg-white/10;
 }
 
+.hero-badge-glass {
+  @apply px-6 py-2.5 rounded-full bg-white/20 backdrop-blur-md border border-white/10 text-white font-black text-xs tracking-widest uppercase;
+}
+
+.hero-badge-gradient {
+  @apply px-6 py-2.5 rounded-full bg-gradient-to-r from-[#7B96E0] to-[#88D3E5] text-[#00EEFF] font-black text-xs tracking-widest uppercase shadow-lg;
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -58,6 +68,7 @@ body {
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(1.1);
   }
@@ -81,4 +92,66 @@ body {
 
 .delay-300 {
   animation-delay: 0.3s;
+}
+
+header {
+  background: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+
+header .nav-menu a {
+  padding: 10px 15px;
+  color: rgba(30, 41, 59, 0.72);
+}
+
+header .nav-menu a.active-menu,
+header .nav-menu a:hover {
+  color: rgb(22, 46, 151) !important;
+  background: rgba(44, 74, 206, 0.08);
+  border-radius: 50px;
+}
+
+header.scrolled {
+  background: #ffffff !important;
+  color: rgb(22, 46, 151);
+}
+
+.col-logo button {
+  color: rgb(22, 46, 151);
+  border-color: rgba(44, 74, 206, 0.16);
+  background: rgba(44, 74, 206, 0.05);
+  box-shadow: rgba(44, 74, 206, 0.22) 0px 0px 12px;
+}
+
+.col-logo a span {
+  color: rgb(22, 46, 151) !important;
+  font-weight: 700;
+}
+
+.bg-transparent-scrolled {
+  background: transparent;
+}
+
+.bg-scrolled {
+  background: #ffffff;
+}
+
+.bg-scrolled .nav-menu a {
+  color: rgb(22, 46, 151) !important;
+}
+
+.bg-scrolled .nav-menu a:hover {
+  color: rgb(22, 46, 151) !important;
+}
+
+.bg-scrolled .col-logo button {
+  color: rgb(22, 46, 151) !important;
+  border-color: rgba(44, 74, 206, 0.16);
+  background: rgba(44, 74, 206, 0.05);
+  box-shadow: rgba(44, 74, 206, 0.22) 0px 0px 12px;
+}
+
+.bg-scrolled .col-logo a span {
+  color: rgb(22, 46, 151) !important;
+  font-weight: 700;
 }

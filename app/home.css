@@ -1,0 +1,28 @@
+header {
+    background-color:
+        color-mix(in oklab, var(--color-white) 20%, transparent);
+}
+
+header .nav-menu a {
+    padding: 10px 15px;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.col-logo button {
+    color: rgba(255, 255, 255, 0.72);
+    border-color: rgba(44, 74, 206, 0.16);
+    background: rgba(44, 74, 206, 0.05);
+    box-shadow: rgba(44, 74, 206, 0.22) 0px 0px 12px;
+}
+
+.col-logo a span {
+    color: rgb(255, 255, 255) !important;
+    font-weight: 700;
+}
+
+header .nav-menu a:hover {
+    color: #ffffff !important;
+    background: #ffffff0d !important;
+    border-color: #2c4ace29 !important;
+    box-shadow: 0 0 12px #2c4ace38 !important;
+}
